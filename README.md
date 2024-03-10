@@ -2,24 +2,24 @@
 
 Some popular scenarios along with system design components/features using Node.js
 
-## User Authentication and Authorization:
+## 1. User Authentication and Authorization:
 
 - Design a user authentication system using JWT (JSON Web Tokens) for securely managing user sessions and permissions.
 - Implement role-based access control (RBAC) to define different levels of access for users, such as customers, admins, and moderators.
 
-### Design
+  ### Design
 
-#### User Authentication
+  #### User Authentication
 
-    - When a user logs in with valid credentials, the server generates a JWT token containing the user's ID and role.
-    - The JWT token is sent back to the client and stored securely (e.g., in local storage or cookies).
-    - For subsequent requests, the client includes the JWT token in the Authorization header.
+  - When a user logs in with valid credentials, the server generates a JWT token containing the user's ID and role.
+  - The JWT token is sent back to the client and stored securely (e.g., in local storage or cookies).
+  - For subsequent requests, the client includes the JWT token in the Authorization header.
 
-#### User Authorization:
+  #### User Authorization:
 
-    - The server verifies the JWT token for each protected route to ensure the user is authenticated.
-    - If the token is valid, the server extracts the user's role from the token and checks if the user has permission to access the requested resource.
-    - Access control is enforced based on predefined roles and permissions.
+  - The server verifies the JWT token for each protected route to ensure the user is authenticated.
+  - If the token is valid, the server extracts the user's role from the token and checks if the user has permission to access the requested resource.
+  - Access control is enforced based on predefined roles and permissions.
 
 ## Product Catalog Management:
 
