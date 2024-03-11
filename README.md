@@ -80,3 +80,60 @@ Some popular scenarios along with system design components/features using Node.j
   - Build user-item interaction matrices or feature vectors to represent the data.
   - Train recommendation models using the prepared data and chosen algorithms.
   - Evaluate the performance of the models using appropriate metrics and validation techniques.
+
+## 10. Design a Web Crawler scalable service:
+
+Design a Web Crawler scalable service that collects information (crawls) from the entire web and fetches hundreds of millions of web documents.
+
+                      +---------------------+
+                      |      Task Queue      |
+                      |   (e.g., RabbitMQ)   |
+                      +----------+----------+
+                                 |
+                       +---------v---------+
+                +----> |  Crawler Instance  |
+                |      |      (Worker)      |
+                |      +---------+---------+
+                |                |
+                |         +------v-------+
+                |         | Fetcher/HTTP |
+                |         |    Client     |
+                |         +------+-------+
+                |                |
+                |      +---------v---------+
+                |      |    HTML Parser    |
+                |      +---------+---------+
+                |                |
+                |          +-----v-----+
+                |          |  Storage  |
+                |          |  System   |
+                |          +-----+-----+
+                |                |
+                +----------------+
+
+### Components:
+
+- Task Queue:
+
+  - Acts as a central queue to distribute URLs to be crawled among multiple crawler instances.
+  - Utilizes a message broker such as RabbitMQ to manage the queuing and consumption of crawl tasks.
+
+- Crawler Instance:
+
+  - Represents a single instance of the crawler application running on a separate machine or container.
+  - Fetches URLs from the task queue, retrieves web pages, and extracts relevant information.
+
+- Fetcher/HTTP Client:
+
+  - Handles HTTP requests and responses for fetching web pages from remote servers.
+  - Implements features like retries, timeouts, and error handling to ensure robustness.
+
+- HTML Parser:
+
+  - Parses the HTML content of fetched web pages to extract structured data and relevant URLs.
+  - Utilizes libraries like BeautifulSoup or lxml in Python or Cheerio in Node.js for efficient parsing.
+
+- Storage System:
+
+  - Stores crawled web documents and associated metadata in a distributed storage system.
+  - Uses scalable storage solutions such as Amazon S3, Google Cloud Storage, or HDFS to handle large volumes of data.
